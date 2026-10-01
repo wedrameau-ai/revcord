@@ -57,4 +57,7 @@ async function acceptVoiceOffer(d){var entry=voicePeers[d.from]||{};var p=new RT
 function attachVoiceAudio(name,media){var old=document.getElementById("audio-"+name);if(old)old.remove();var a=document.createElement("audio");a.id="audio-"+name;a.autoplay=true;a.playsInline=true;a.srcObject=media;a.muted=deafened;a.style.display="none";document.body.appendChild(a);a.play().catch(function(){toast("Click the page once if browser audio is blocked")})}
 function removeVoicePeer(name){var e=voicePeers[name];if(e&&e.pc)e.pc.close();delete voicePeers[name];var a=document.getElementById("audio-"+name);if(a)a.remove();refreshVoiceRoom()}
 function leaveVoice(){if(!voiceActive)return;try{bc.postMessage({type:"voice-leave",from:state.username,room:voiceRoom})}catch(e){}Object.keys(voicePeers).forEach(removeVoicePeer);if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}voiceActive=false;voiceRoom=null;closeModal();render()}
-\nwindow.addEventListener("beforeunload",function(){try{if(voiceActive&&bc)bc.postMessage({type:"voice-leave",from:state.username,room:voiceRoom});if(peer&&callToken&&bc)bc.postMessage({type:"end",from:state.username,to:peer,token:callToken})}catch(e){}});\n
+
+window.addEventListener("beforeunload",function(){try{if(voiceActive&&bc)bc.postMessage({type:"voice-leave",from:state.username,room:voiceRoom});if(peer&&callToken&&bc)bc.postMessage({type:"end",from:state.username,to:peer,token:callToken})}catch(e){}});
+
+</script></body></html>
