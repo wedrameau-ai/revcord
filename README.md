@@ -8,7 +8,7 @@ A custom Discord-style frontend built for the browser with **no backend**.
 - Real local persistence with localStorage
 - Servers: create, switch, rename, delete
 - Text channels: create, switch, send messages
-- Voice channels: clicking one starts a voice call
+- Voice channels: join live browser voice rooms
 - Video calls with WebRTC
 - Microphone mute, camera toggle, and deafen
 - Same-browser friend requests and friends
@@ -21,15 +21,21 @@ A custom Discord-style frontend built for the browser with **no backend**.
 - Responsive desktop/mobile layout
 - No seeded fake users or fake online member counts
 
+## Voice chat in the no-backend build
+
+Voice channels use WebRTC for audio and BroadcastChannel for local signaling.
+
+To test two local identities on the same machine, open RevCord in two tabs and use different test URLs such as `?user=Alice` and `?user=Bob`. Join the same voice channel in both tabs. Allow microphone access in both tabs.
+
+The browser-only VC is not a multi-device account system. Different devices need a backend signaling layer (or a hosted signaling service) plus persistent user/channel data.
+
 ## No-backend limitation
 
 A browser-only app cannot provide a trustworthy multi-device account system, persistent cross-device friends, or server-side message synchronization by itself. RevCord therefore keeps local state in the browser.
 
-For testing calls without a backend, open RevCord in two tabs/windows on the same browser and use two different local usernames. The tabs communicate through BroadcastChannel and establish the actual media connection through WebRTC. Camera/microphone permission is required.
-
 ## Run
 
-This is a static site. Open index.html from a local/static web server or deploy the repository to GitHub Pages or another static host.
+This is a static site. Open index.html from a local/static web server or deploy the repository to GitHub Pages.
 
 ## Next backend phase
 
