@@ -14,7 +14,7 @@
 "use strict";
 var KEY="revcord-state-v2";
 var base={username:"",activeServer:"home",activeChannel:"general",servers:[{id:"home",name:"Home",icon:"R",channels:[{id:"general",name:"general",type:"text"},{id:"off-topic",name:"off-topic",type:"text"},{id:"lounge",name:"Lounge",type:"voice"}]}],messages:{general:[{id:"welcome",user:"RevCord",text:"Welcome to RevCord. This is a local-only workspace until a backend is added.",time:Date.now()}],"off-topic":[]},friends:[],requests:[],settings:{theme:"dark",compact:false,animations:true,notifications:true,keybinds:true}};
-var state=load(), channelBeforeCall=null, bc=null, pc=null, stream=null, peer=null, callToken=null, deafened=false, voiceRoom=null, voicePeers={}, voiceActive=false;
+var state=load(), channelBeforeCall=null, bc=null, pc=null, stream=null, peer=null, callToken=null, deafened=false, voiceRoom=null, voicePeers={}, voiceActive=false;var testUser=new URLSearchParams(location.search).get("user");if(testUser&&testUser.trim())state.username=testUser.trim().slice(0,24);
 function load(){try{var x=JSON.parse(localStorage.getItem(KEY));return x?Object.assign({},base,x,{settings:Object.assign({},base.settings,x.settings||{})}):JSON.parse(JSON.stringify(base))}catch(e){return JSON.parse(JSON.stringify(base))}}
 function save(){localStorage.setItem(KEY,JSON.stringify(state))}
 function uid(p){return (p||"id")+"-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,7)}
